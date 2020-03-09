@@ -1,0 +1,349 @@
+% Template DFG-Sachbeihilfe-Antrag
+% Version Aug 2014
+% Autor: Fabian schneider, VISUS 
+% erstellt auf Basis einer Vorlage von Markus Huber, Corinna Vehlow und Marco Ament
+% ursprüngliches Template: Stephan Wenger
+
+\documentclass{dfg_en}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{eurosym}
+\usepackage{amsmath,amssymb,amsfonts,amsthm} % mathematische Symbole
+\usepackage{graphicx}  % notwendig für die Einbettung von Grafiken.-graphics ist ein ganzes Bündel und enthält auch graphicx
+\usepackage{color}
+\usepackage{setspace}
+\usepackage{lmodern}  % Alternative zur palatino Schrift
+\usepackage{textcomp,gensymb} % umfangreiche Pakete fuer Symbole wie \micro, \ohm, \degree, \celsius etc.
+%\usepackage{subfig}  % Um Abbildugnen mit Subfigures erstellen zu können
+\usepackage{subfigure}
+\usepackage{calc}   % ermoeglicht Rechnen mit Laengen und Zaehlern
+\usepackage[plain]{fancyref}
+\usepackage{helvet}
+\usepackage{microtype}
+\usepackage{pdfpages}
+\usepackage{currvita}
+%\usepackage[babel,german=guillemets]{csquotes}
+\usepackage{titlesec} % provides titlespacing
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{tabularx}
+
+% Labels for objectives - BEGIN
+\newcounter{objectives}
+\makeatletter
+\newcommand\objective[1][]{\item[#1]\refstepcounter{objectives}\def\@currentlabel{#1}}
+\makeatother
+% Labels for objectives - END
+
+% Labels for RQs - BEGIN
+\makeatletter
+\newcommand\rqs[1][]{\item[#1]\def\@currentlabel{#1}}
+\makeatother
+% Labels for RQs - END
+
+\usepackage{enumitem}
+
+% Disable single lines at the start of a paragraph (Schusterjungen)
+\clubpenalty = 10000
+% Disable single lines at the end of a paragraph (Hurenkinder)
+\widowpenalty = 10000 \displaywidowpenalty = 10000
+
+% References
+\usepackage[style=numeric-comp,bibstyle=numeric,sorting=none,date=short,backend=bibtex,isbn=false,url=false,doi=false,eprint=false,defernumbers=true,maxnames=9,minnames=5,firstinits=true]{biblatex}
+\addbibresource{references.bib}
+\DeclareBibliographyCategory{publikationen}
+\DeclareBibliographyCategory{publikationen-andere}
+\DeclareBibliographyCategory{patente-angemeldet}
+\DeclareBibliographyCategory{patente-akzeptiert}
+\newcommand*{\addtopub}[1]{\addtocategory{publikationen}{#1}\nocite{#1}}
+\newcommand*{\addtopubandere}[1]{\addtocategory{publikationen-andere}{#1}\nocite{#1}}
+\newcommand*{\addtopatangemeldet}[1]{\addtocategory{patente-angemeldet}{#1}\nocite{#1}}
+\newcommand*{\addtopatakzeptiert}[1]{\addtocategory{patente-akzeptiert}{#1}\nocite{#1}}
+\DeclareBibliographyCategory{publikationen_juerjens}
+\newcommand*{\addtopubju}[1]{\addtocategory{publikationen_juerjens}{#1}\nocite{#1}}
+\DeclareBibliographyCategory{publikationen_schneider}
+\newcommand*{\addtopubschn}[1]{\addtocategory{publikationen_schneider}{#1}\nocite{#1}}
+\renewcommand{\bibfont}{\normalfont\scriptsize}
+
+\graphicspath{figures}
+
+% Links and references
+\definecolor{bluecol}{rgb}{0.03,0.05,0.15}
+\usepackage[colorlinks, urlcolor=bluecol, citecolor=black, linkcolor=bluecol, pdfborder={0 0 0}, pdfpagemode=UseNone]{hyperref}
+% For autoref
+\addto\extrasenglish{  
+	\def\sectionautorefname{Section}  
+}
+
+%\newcounter{wp}
+%\newcounter{subwp}[wp]
+%\renewcommand\thesubwp{\thewp.\arabic{subwp}} 
+%\newcommand{\newwp}{\refstepcounter{wp}}
+%\newcommand{\phase}[1]{\refstepcounter{wp}\subparagraph{PHASE~\thewp: #1}}
+%\newcommand{\wpackage}[1]{\refstepcounter{subwp}\subparagraph{WP~\thesubwp: #1}}
+
+%\newcommand{\wp}[2]{\paragraph*{{\color{#2}\rule[-1pt]{10pt}{10pt}} #1}\vspace{-0.3cm}}
+\newcommand{\mywp}[2]{\subparagraph{{\color{#2}\rule[-1pt]{5pt}{10pt}} #1}}
+\definecolor{color_wa1}{HTML}{5B9BD5}
+\definecolor{color_wa2}{HTML}{70AD47}
+\definecolor{color_wa3}{HTML}{009999}
+
+\newcommand{\emptysection}{}
+\newcommand{\emptyheading}{ \mdseries--- Not applicable.}
+
+\newenvironment{costs}[1][]{
+\newcommand{\totals}[1]{\cline{3-3} & & \textbf{##1}}
+\begin{center}
+\begin{tabular}{lrr}
+{\bfseries #1} & pro Jahr~~ & gesamt~~ \\
+\hline
+}{
+\end{tabular}
+\end{center}
+}
+
+\newenvironment{costshardware}[1][]{
+\newcommand{\totals}[1]{\cline{2-2} & \textbf{##1}}
+\begin{center}
+\begin{tabular}{lr}
+{\bfseries #1} & gesamt~~ \\
+\hline
+}{
+\end{tabular}
+\end{center}
+}
+
+\definecolor{redcol}{rgb}{.7,0,0}
+\definecolor{bluecol}{rgb}{0,0,.8}
+\newcommand{\remark}[1]{\emph{{\color{bluecol}\textbf{REMARK:} #1}}}
+\newcommand{\myldots}{\colorbox{black!20}{{\color{black!60}[...]}}}
+\newcommand{\citreq}{\colorbox{yellow!60}{{\color{redcol}[\emph{citation?}]}}}
+\newcommand{\email}[1]{\href{mailto:#1}{#1}}
+
+\usepackage{todonotes}
+%\usepackage[disable]{todonotes}
+
+\newcommand{\motivation}[1]{{\scriptsize\textbf{[Motivation:]}} #1}
+\newcommand{\method}[1]{{\scriptsize\textbf{[Method:]}} #1}
+\newcommand{\results}[1]{{\scriptsize\textbf{[Result:]}} #1}
+
+\begin{document} % max. 20 Seiten
+
+%\listoftodos
+
+% -----------------------------------------------------------------------------------
+
+\formattitle{Prof. Dr. Jan Juerjens, Universität Koblenz-Landau, Koblenz, Germany \\ 
+	Prof. Dr. Kurt Schneider, Leibniz Universität Hannover, Hannover, Germany
+	\\
+\\
+TraceSec -- Tracing Security in Software Engineering}
+
+% -----------------------------------------------------------------------------------
+
+\begin{figure*}[b!]
+	\includegraphics[width=\columnwidth]{dfg_address}
+\end{figure*}
+\vspace{1em}
+\input{0-summary}
+
+\section{State of the art and preliminary work}
+\label{sec:state_of_the_art}
+
+\input{1-stand}
+
+\subsection{Project-related publications}
+
+\subsubsection{Articles published by outlets with scientific quality assurance, book publications, and works accepted for publication but not yet published.}
+\input{1-1-1-publikationen}
+%\defbibheading{Pub}{\label{sec:pub}}
+%\addtopub{Parnas1972Criteria}
+%\printbibliography[heading=Pub,category=publikationen]
+
+\subsection*{1.1.2--1.1.3\emptyheading}
+
+%\subsubsection{Andere Veröffentlichungen}
+%\input{1-1-2-veroeffentlichungen}
+%\defbibheading{PubAndere}{\label{sec:pub-andere}}
+%\addtopubandere{Shneiderman1996Eyes}
+%\printbibliography[heading=PubAndere,category=publikationen-andere]
+
+%\subsubsection{Patente}
+
+%\paragraph{Angemeldet}
+%\input{1-1-3-1-angemeldet}
+%\defbibheading{PatAngemeldet}{\label{sec:pat-angemeldet}}
+%\addtopatangemeldet{Shneiderman1996Eyes}
+%\printbibliography[heading=PatAngemeldet,category=patente-angemeldet]
+
+%\paragraph{Akzeptiert}
+%\input{1-1-3-2-akzeptiert}
+%\defbibheading{PatAkzeptiert}{\label{sec:pat-akzeptiert}}
+%\addtopatakzeptiert{Shneiderman1996Eyes}
+%\printbibliography[heading=PatAkzeptiert,category=patente-akzeptiert]
+
+% -----------------------------------------------------------------------------------
+
+\section{Objectives and work programme}
+
+\subsection{Anticipated total duration of the project}
+36 months.
+
+\subsection{Objectives}\label{sec:objectives}
+\input{2-2-ziele}
+
+\subsection{Work programme incl. proposed research methods}
+% Für jede Antragstellerin und jeden Antragsteller
+\input{2-3-arbeitsprogramm}
+
+\subsection{Data handling}
+\input{2-4-ergebnisse}
+
+\subsection{Other information\emptyheading}
+% Hier ist Raum für weitere Angaben soweit sie nicht in den anderen Punkten aufgeführt werden konnten, aber aus Sicht der Antragstellerin bzw. des Antragstellers für diesen Antrag wichtig sind.
+%[Text]%\input{2-5-weiteres}
+
+\subsection{Descriptions of proposed investigations involving experiments on humans, human materials or animals as well as dual use research of concern}
+\input{2-6-menschen}
+
+\subsection{Information on scientific and financial involvement of international cooperation partners}
+\input{2-7-ausland}
+
+% -----------------------------------------------------------------------------------
+
+\pagebreak
+
+\section{Bibliography}
+%\input{3-literatur}
+\defbibheading{Lit}{\label{sec:literatur}}\vspace{-0.5cm}
+\setlength\bibitemsep{0pt}
+\begin{multicols}{2} 
+	{\scriptsize
+	\printbibliography[heading=Lit,notcategory=publikationen_juerjens, notcategory=publikationen_schneider,notcategory=publikationen-andere,notcategory=patente-angemeldet,notcategory=patente-akzeptiert]}
+\end{multicols}
+%
+
+% -----------------------------------------------------------------------------------
+
+\section{Requested modules/funds}
+% Begründung jeder im Formular erfassten Position für jede Antragstellerin und jeden Antragsteller, unter Angabe von  Name, Vorname
+%\input{4-mittel}
+
+\subsection{Basic Module}
+
+\subsubsection{Funding for Staff}
+\input{4-1-1-personalmittel}
+
+\subsubsection{Direct Project Costs}
+%\input{4-1-2-sachmittel}
+
+\paragraph{Equipment up to €10,000, Software and Consumables\emptyheading}
+%\input{4-1-2-1-geraete}
+
+\paragraph{Travel Expenses}
+\input{4-1-2-2-reisemittel}
+
+\paragraph{Visiting Researchers}
+% (ausgenommen Mercator-Fellow)
+\input{4-1-2-3-gaeste}
+
+\paragraph*{4.1.2.3--4.1.2.5\emptyheading}
+
+%\paragraph{Mittel für Versuchstiere\emptyheading}
+%%[Text]%\input{4-1-2-4-tiere}
+%
+%\paragraph{Sonstige Mittel}
+%[Text]%\input{4-1-2-5-sonstige}
+%
+\setcounter{paragraph}{5}
+\paragraph{Project-related publication expenses}
+% 
+
+\subsubsection{Instrumentation\emptyheading}
+
+%\subsubsection{Investitionsmittel}
+%[Text]%\input{4-1-3-investitionen}
+%
+%\paragraph{Geräte über 10.000 Euro}
+%[Text]%\input{4-1-3-1-investitionen10}
+%
+%\paragraph{Großgeräte über 50.000 Euro}
+%[Text]%\input{4-1-3-2-investitionen50}
+
+\subsection*{4.2--4.7\emptyheading}
+
+%\subsection{Modul Eigene Stelle}
+%[Text]%\input{4-2-eigene}
+%
+%\subsection{Modul Vertretung}
+%[Text]%\input{4-3-vertretung}
+%
+%\subsection{Modul Rotationsstellen}
+%[Text]%\input{4-4-rotation}
+%
+%\subsection{Modul Mercator Fellow}
+%[Text]%\input{4-5-mercator}
+%
+%\subsection{Modul Projektspezifische Workshops}
+%[Text]%\input{4-6-workshop}
+%
+%\subsection{Modul Öffentlichkeitsarbeit}
+%[Text]%\input{4-7-oeffentlichkeit}
+
+% -----------------------------------------------------------------------------------
+
+\section{Project requirements}
+%  Für jede Antragstellerin und jeden Antragsteller, unter Angabe von Name, Vorname, Dienststellung (bei befristetem Arbeitsvertrag Angaben zur Laufzeit und ggf. zum Zuwendungsgeber)
+
+\subsection{Employment status information}
+%  Für jede Antragstellerin und jeden Antragsteller, unter Angabe von Name, Vorname, Dienststellung (bei befristetem Arbeitsvertrag Angaben zur Laufzeit und ggf. zum Zuwendungsgeber)
+\input{5-1-dienststellung}
+
+\subsection{First-time proposal data}
+%\input{5-2-erstantrag}
+
+\subsection{Composition of the project group}
+% Angabe nur der Personen, die im Projekt mitarbeiten, aber nicht aus diesem finanziert werden, mit Name, akademischem Grad, Dienststellung und Art der Finanzierung
+\vspace{-5pt}
+\noindent\begin{tabularx}{\textwidth}{lX}
+	{\bf Koblenz-Landau}  & \vspace{-0.68cm}\begin{itemize} \setlength\itemsep{-0.4em}
+		\item \textbf{Prof. Dr. Jan Jürjens} (applicant/principle investigator), full professor, group leader
+		\item \textbf{N.N.}, doctoral researcher, funded by the proposed project\vspace{-0.6cm}
+	\end{itemize} \\
+	\\
+	{\bf Hannover} & \vspace{-0.68cm}\begin{itemize} \setlength\itemsep{-0.4em}
+		\item \textbf{Prof. Dr. Kurtz Schneider} (applicant/principle investigator), full professor, group leader
+		\item \textbf{N.N.}, doctoral researcher, funded by the proposed project\vspace{-0.6cm}
+	\end{itemize}
+\end{tabularx}
+
+\subsection{Cooperation with other researchers}
+
+\subsubsection{Researchers with whom you have agreed to cooperate on this project}
+Within the proposed project, we plan to collaborate closely with the following researchers. They contribute additional experience in different areas to the project. 
+\vspace{-5pt}
+\begin{itemize}\setlength\itemsep{-0.4em}
+	\item \textbf{? ? }, University of ?-- supporting with expertise in \ldots.
+\end{itemize}
+%\input{5-4-1-zusammenarbeit}
+
+\subsubsection{Researchers with whom you have collaborated scientifically within the past three years}
+\input{5-4-2-zusammenarbeit}
+
+%\subsection{Scientific equipment}
+% Angaben zu den für das Projekt zur Verfügung stehenden größeren Geräten (ggf. auch Großrechenanlagen, wenn Rechenleistung benötigt wird)
+%\input{5-5-apparate}
+
+\subsection*{5.5--5.7\emptyheading}
+
+%\subsection{Projektrelevante Beteiligungen an erwerbswirtschaftlichen Unternehmen\emptyheading}
+%% Angaben zum Zusammenhang des Projekts mit dem Produktbereich des Unternehmens
+%% [Text]%\input{5-6-unternehmen}
+
+% -----------------------------------------------------------------------------------
+
+\section{Additional information}
+% Bitte informieren Sie die DFG hier insbesondere - sofern zutreffend - über bereits an anderer Stelle eingereichte Anträge bzw. Anträge mit Großgeräten.
+\input{6-erklaerungen}
+
+\end{document}

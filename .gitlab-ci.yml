@@ -1,0 +1,15 @@
+image: listx/texlive:2017
+
+variables:
+  MAIN_NAME: "Beschreibung_des_Vorhabens"
+
+build:
+  script:
+    - pdflatex --interaction=nonstopmode ${MAIN_NAME}.tex || true
+    - bibtex ${MAIN_NAME} || true
+    - pdflatex --interaction=nonstopmode ${MAIN_NAME}.tex || true
+    - pdflatex --interaction=nonstopmode ${MAIN_NAME}.tex || true
+  artifacts:
+    name: "${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}"
+    paths:
+      - ${MAIN_NAME}.pdf

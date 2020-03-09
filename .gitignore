@@ -1,0 +1,16 @@
+*-blx.bib
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.tdo
+/Beschreibung_des_Vorhabens.pdf
+*.bak
+*.sav
+*.txss
+*.gz(busy)
